@@ -1,3 +1,5 @@
+package generator
+
 interface Generator {
 
     fun next(): Long

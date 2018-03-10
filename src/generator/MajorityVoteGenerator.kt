@@ -1,6 +1,10 @@
-const val LONG_BITS_NUMBER = 63
+package generator
 
 class MajorityVoteGenerator(private vararg val generators: Generator) : Generator {
+
+    companion object {
+        private const val LONG_BITS_NUMBER = 63
+    }
 
     override fun next(): Long {
         val values = generators.map { it.next() }
