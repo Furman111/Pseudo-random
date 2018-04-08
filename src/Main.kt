@@ -1,5 +1,6 @@
 import generator.MajorityVoteGenerator
 import generator.PseudoRandomGenerator
+import test.spectral.testSpectral
 
 fun main(args: Array<String>) {
 
@@ -13,11 +14,12 @@ fun main(args: Array<String>) {
     )
     ) {
         val v = mutableListOf<Long>()
-        for (i in 1..100000) {
+        for (i in 1..1000000) {
             v.add(next())
         }
         v.writeSequence()
         println("Period = ${v.countPeriod()}")
+        testSpectral(v)
     }
 
 }
