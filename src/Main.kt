@@ -14,7 +14,7 @@ fun main(args: Array<String>) {
     )
     ) {
         val v = mutableListOf<Long>()
-        for (i in 1..1000000) {
+        for (i in 1..2048) {
             v.add(next())
         }
         v.writeSequence()

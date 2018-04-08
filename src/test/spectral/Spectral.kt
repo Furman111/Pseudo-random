@@ -1,6 +1,9 @@
 package test.spectral
 
 import org.apache.commons.math3.special.Erf.erfc
+import org.apache.commons.math3.transform.DftNormalization
+import org.apache.commons.math3.transform.FastFourierTransformer
+import org.apache.commons.math3.transform.TransformType
 import kotlin.math.abs
 import kotlin.math.log2
 import kotlin.math.sqrt
@@ -23,13 +26,11 @@ fun testSpectral(sequence: List<Long>) {
         }
     }
 
-    val sReal = DoubleArray(n)
-    val sImag = DoubleArray(n)
-
-    computeDft(seq.toDoubleArray(), DoubleArray(n), sReal, sImag)
+    val transformated = FastFourierTransformer(DftNormalization.STANDARD)
+            .transform(seq.toDoubleArray(), TransformType.FORWARD)
 
     val m = MutableList(n / 2) {
-        sqrt(sReal[it] * sReal[it] + sImag[it] * sImag[it])
+        sqrt(transformated[it].real * transformated[it].real + transformated[it].imaginary * transformated[it].imaginary)
     }
 
     val t = sqrt(log2(1 / 0.05) * n)
