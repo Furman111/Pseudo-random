@@ -1,7 +1,13 @@
-import java.io.*
+import java.io.BufferedReader
+import java.io.BufferedWriter
+import java.io.FileReader
+import java.io.FileWriter
 import java.util.*
+import java.lang.Long as JavaLong
 
 const val FILE_PATH = "/users/stepanfurman/documents/4k2s/Криптография/LAB2/sequence.txt"
+const val FILE_EXPONENT = "/users/stepanfurman/documents/4k2s/Криптография/LAB2/data.e"
+const val FILE_PI = "/users/stepanfurman/documents/4k2s/Криптография/LAB2/data.pi"
 
 fun readSequence(readFrom: String = FILE_PATH): List<Long> =
         (Scanner(BufferedReader(FileReader(readFrom)))).use {
@@ -13,8 +19,24 @@ fun readSequence(readFrom: String = FILE_PATH): List<Long> =
         }
 
 fun List<Long>.writeSequence(writeTo: String = FILE_PATH) = BufferedWriter(FileWriter(writeTo)).use {
-    for(number in this){
+    for (number in this) {
         it.append("$number ")
     }
 }
 
+fun readTestingSequence(readFrom: String): List<Long> =
+        (Scanner(BufferedReader(FileReader(readFrom)))).use {
+            val res = mutableListOf<Long>()
+            while (res.size < 524288) {
+                val line = it.nextLine()
+                for (char in line) {
+                    try {
+                        if (res.size < 524288) {
+                            res.add(JavaLong.valueOf(char.toString()))
+                        }
+                    } catch (e: Exception) {
+                    }
+                }
+            }
+            res
+        }
