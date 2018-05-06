@@ -19,7 +19,7 @@ fun main(args: Array<String>) {
             v.add(next())
         }
         v.writeSequence()
-        println("Period = ${v.countPeriod()}")
+        println("Period = ${v.countPeriod()}\n")
         testSpectral(v)
         testNonOverlapping(v, listOf(0, 0, 1))
     }
