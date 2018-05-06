@@ -6,16 +6,16 @@ import test.spectral.testSpectral
 fun main(args: Array<String>) {
 
     with(MajorityVoteGenerator(
-            LFSRGenerator(k = 6, a = arrayOf(0, 0, 1, 0, 0, 1), s0 = arrayOf(0, 1, 0, 1, 1, 0)),
-            LFSRGenerator(k = 6, a = arrayOf(0, 0, 0, 1, 1, 1), s0 = arrayOf(1, 0, 0, 1, 1, 0)),
-            LFSRGenerator(k = 6, a = arrayOf(0, 0, 0, 0, 1, 1), s0 = arrayOf(0, 1, 1, 1, 1, 0)))
+            LFSRGenerator(k = 6, a = arrayOf(0, 0, 1, 0, 0, 1), s0 = arrayOf(0, 1, 0, 1, 0, 0)),
+            LFSRGenerator(k = 6, a = arrayOf(0, 0, 0, 1, 1, 1), s0 = arrayOf(1, 0, 1, 1, 1, 0)),
+            LFSRGenerator(k = 6, a = arrayOf(0, 0, 0, 0, 1, 1), s0 = arrayOf(0, 1, 1, 0, 1, 0)))
     ) {
         val v = mutableListOf<Long>()
-        for (i in 1..33554432) {
+        for (i in 1..1048576) {
             v.add(next())
         }
         v.writeSequence()
-        println("Period = ${v.countPeriod()}\n")
+        println("Period = ${v.countPeriod(6)}\n")
         testSpectral(v)
         testNonOverlapping(v, listOf(0, 0, 1))
     }
