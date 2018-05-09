@@ -1,5 +1,6 @@
 import generator.LFSRGenerator
 import generator.MajorityVoteGenerator
+import test.testMaurerUniversalWithRecommendedParams
 import test.testNonOverlapping
 import test.testSpectral
 
@@ -20,16 +21,19 @@ fun main(args: Array<String>) {
         println("Тест последовательности:")
         testSpectral(v)
         testNonOverlapping(v, listOf(0, 0, 1))
+        testMaurerUniversalWithRecommendedParams(v)
 
         println("Тест Пи:")
         val pi = readTestingSequence(FILE_PI)
         testSpectral(pi)
         testNonOverlapping(pi, listOf(0, 0, 1))
+        testMaurerUniversalWithRecommendedParams(pi)
 
         println("Тест экспоненты:")
         val exp = readTestingSequence(FILE_EXPONENT)
         testSpectral(exp)
         testNonOverlapping(exp, listOf(0, 0, 1))
+        testMaurerUniversalWithRecommendedParams(exp)
 
     }
 
