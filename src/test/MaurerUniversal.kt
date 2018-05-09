@@ -93,8 +93,8 @@ fun testMaurerUniversal(blockLength: Int, initializationBlocksCount: Int, sequen
 
     //Вычисление сумму разностей растояний между блоками
     for (block in testBlocks.withIndex()) {
-        sum += log2((block.index + initializationBlocksCount - table[blockCombinations.indexOf(block.value)]).toDouble())
-        table[blockCombinations.indexOf(block.value)] = block.index + 1
+        sum += log2((block.index + initializationBlocksCount + 1 - table[blockCombinations.indexOf(block.value)]).toDouble())
+        table[blockCombinations.indexOf(block.value)] = block.index + initializationBlocksCount + 1
     }
 
     val fn = 1.toDouble() / testingBlocksCount.toDouble() * sum
