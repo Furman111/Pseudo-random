@@ -1,4 +1,4 @@
-package test.nonoverlapping
+package test
 
 import org.apache.commons.math3.special.Gamma.regularizedGammaQ
 import kotlin.math.pow

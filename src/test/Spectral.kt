@@ -1,4 +1,4 @@
-package test.spectral
+package test
 
 import org.apache.commons.math3.special.Erf.erfc
 import org.apache.commons.math3.transform.DftNormalization

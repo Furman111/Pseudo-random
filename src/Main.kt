@@ -1,7 +1,7 @@
 import generator.LFSRGenerator
 import generator.MajorityVoteGenerator
-import test.nonoverlapping.testNonOverlapping
-import test.spectral.testSpectral
+import test.testNonOverlapping
+import test.testSpectral
 
 fun main(args: Array<String>) {
 
