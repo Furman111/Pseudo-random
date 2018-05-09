@@ -17,6 +17,8 @@ fun testSpectral(sequence: List<Long>) {
 
     val seq = sequence.map { (2 * it - 1).toDouble() }.toMutableList()
 
+    processSize(seq)
+
     val n = seq.size
 
     val transformed = FastFourierTransformer(DftNormalization.STANDARD)
@@ -43,4 +45,17 @@ fun testSpectral(sequence: List<Long>) {
         println(toString())
     }
 
+}
+
+private fun processSize(sequence: MutableList<Double>) {
+    val size = sequence.size
+    var temp = 0
+    var pow = 0.toDouble()
+    while (temp < size) {
+        temp = Math.pow(2.toDouble(), pow++).toInt()
+    }
+    temp /= 2
+    while (temp != sequence.size) {
+        sequence.removeAt(sequence.lastIndex)
+    }
 }
