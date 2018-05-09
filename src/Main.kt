@@ -11,7 +11,7 @@ fun main(args: Array<String>) {
             LFSRGenerator(k = 6, a = arrayOf(0, 0, 0, 0, 1, 1), s0 = arrayOf(0, 1, 1, 0, 1, 0)))
     ) {
         val v = mutableListOf<Long>()
-        for (i in 1..1000000) {
+        for (i in 1..1048576) {
             v.add(next())
         }
         v.writeSequence()

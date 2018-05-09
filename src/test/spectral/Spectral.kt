@@ -5,7 +5,6 @@ import org.apache.commons.math3.transform.DftNormalization
 import org.apache.commons.math3.transform.FastFourierTransformer
 import org.apache.commons.math3.transform.TransformType
 import kotlin.math.abs
-import kotlin.math.log2
 import kotlin.math.sqrt
 
 /**
@@ -16,11 +15,9 @@ import kotlin.math.sqrt
 
 fun testSpectral(sequence: List<Long>) {
 
-    val n = sequence.size
-
     val seq = sequence.map { (2 * it - 1).toDouble() }.toMutableList()
 
-    addingNulls(seq)
+    val n = seq.size
 
     val transformed = FastFourierTransformer(DftNormalization.STANDARD)
             .transform(seq.toDoubleArray(), TransformType.FORWARD)
@@ -29,7 +26,7 @@ fun testSpectral(sequence: List<Long>) {
         sqrt(transformed[it].real * transformed[it].real + transformed[it].imaginary * transformed[it].imaginary)
     }
 
-    val t = sqrt(log2(1 / 0.05) * n)
+    val t = sqrt(2.995732274 * n)
 
     val n0 = 0.95 * n / 2
 
@@ -46,16 +43,4 @@ fun testSpectral(sequence: List<Long>) {
         println(toString())
     }
 
-}
-
-private fun addingNulls(sequence: MutableList<Double>) {
-    val size = sequence.size
-    var temp = 0
-    var pow = 0.toDouble()
-    while (temp < size) {
-        temp = Math.pow(2.toDouble(), pow++).toInt()
-    }
-    while (temp != sequence.size) {
-        sequence.add(0.toDouble())
-    }
 }
