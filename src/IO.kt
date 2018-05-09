@@ -27,13 +27,11 @@ fun List<Long>.writeSequence(writeTo: String = FILE_PATH) = BufferedWriter(FileW
 fun readTestingSequence(readFrom: String): List<Long> =
         (Scanner(BufferedReader(FileReader(readFrom)))).use {
             val res = mutableListOf<Long>()
-            while (res.size < 524288) {
+            while (it.hasNextLine()) {
                 val line = it.nextLine()
                 for (char in line) {
                     try {
-                        if (res.size < 524288) {
-                            res.add(JavaLong.valueOf(char.toString()))
-                        }
+                        res.add(JavaLong.valueOf(char.toString()))
                     } catch (e: Exception) {
                     }
                 }

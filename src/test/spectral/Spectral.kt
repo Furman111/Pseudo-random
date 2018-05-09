@@ -16,21 +16,15 @@ import kotlin.math.sqrt
 
 fun testSpectral(sequence: List<Long>) {
 
-    val n = sequence.size
+    val seq = sequence.map { (2 * it - 1).toDouble() }.toMutableList()
 
-    val seq = sequence.map {
-        when (it) {
-            0.toLong() -> -1.toDouble()
-            1.toLong() -> 1.toDouble()
-            else -> throw IllegalArgumentException("Not bit's sequence")
-        }
-    }
+    val n = countLength(seq)
 
-    val transformated = FastFourierTransformer(DftNormalization.STANDARD)
+    val transformed = FastFourierTransformer(DftNormalization.STANDARD)
             .transform(seq.toDoubleArray(), TransformType.FORWARD)
 
     val m = MutableList(n / 2) {
-        sqrt(transformated[it].real * transformated[it].real + transformated[it].imaginary * transformated[it].imaginary)
+        sqrt(transformed[it].real * transformed[it].real + transformed[it].imaginary * transformed[it].imaginary)
     }
 
     val t = sqrt(log2(1 / 0.05) * n)
@@ -50,4 +44,17 @@ fun testSpectral(sequence: List<Long>) {
         println(toString())
     }
 
+}
+
+private fun countLength(sequence: MutableList<Double>): Int {
+    val size = sequence.size
+    var res = 0
+    var pow = 0.toDouble()
+    while (res < size) {
+        res = Math.pow(2.toDouble(), pow++).toInt()
+    }
+    while (res != sequence.size) {
+        sequence.add(0.toDouble())
+    }
+    return res
 }
