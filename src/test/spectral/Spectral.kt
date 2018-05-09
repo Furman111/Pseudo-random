@@ -16,9 +16,11 @@ import kotlin.math.sqrt
 
 fun testSpectral(sequence: List<Long>) {
 
+    val n = sequence.size
+
     val seq = sequence.map { (2 * it - 1).toDouble() }.toMutableList()
 
-    val n = countLength(seq)
+    addingNulls(seq)
 
     val transformed = FastFourierTransformer(DftNormalization.STANDARD)
             .transform(seq.toDoubleArray(), TransformType.FORWARD)
@@ -46,15 +48,14 @@ fun testSpectral(sequence: List<Long>) {
 
 }
 
-private fun countLength(sequence: MutableList<Double>): Int {
+private fun addingNulls(sequence: MutableList<Double>) {
     val size = sequence.size
-    var res = 0
+    var temp = 0
     var pow = 0.toDouble()
-    while (res < size) {
-        res = Math.pow(2.toDouble(), pow++).toInt()
+    while (temp < size) {
+        temp = Math.pow(2.toDouble(), pow++).toInt()
     }
-    while (res != sequence.size) {
+    while (temp != sequence.size) {
         sequence.add(0.toDouble())
     }
-    return res
 }
